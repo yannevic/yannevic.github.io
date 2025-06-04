@@ -37,7 +37,7 @@ header {
   cursor: pointer;
   margin-top: 2rem;
   transition: transform 0.3s;
-  z-index: 2;
+  z-index: 1;
   position: relative;
 }
 
@@ -49,6 +49,8 @@ header {
   margin-top: 1rem;
   font-size: 1.1rem;
   color: #b32465;
+  position: relative;
+  z-index: 1;
 }
 
 .popup {
@@ -61,6 +63,7 @@ header {
   background: rgba(0,0,0,0.5);
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .quiz-box {
@@ -74,6 +77,7 @@ header {
   text-align: left;
   position: relative;
   animation: slideUp 0.5s ease-out;
+  z-index: 11;
 }
 
 @keyframes slideUp {
@@ -132,8 +136,8 @@ header {
   <audio autoplay loop>
     <source src="https://open.spotify.com/artist/0llIp92s72MGxqoJviNjGC" type="audio/mp3">
     Seu navegador não suporta áudio.
-  </audio>  <header>oii 🌹</header>  <div class="typing-container" id="typing"></div>  <div class="envelope" onclick="openQuiz()">💌</div>
-  <div class="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>  <div class="popup" id="quizPopup">
+  </audio>  <header>oii 🌹</header>  <div class="typing-container" id="typing"></div>  <div class="envelope" id="envelope" onclick="openQuiz()">💌</div>
+  <div class="label" id="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>  <div class="popup" id="quizPopup">
     <div class="quiz-box" id="quizBox">
       <button class="close-btn" onclick="closeQuiz()">×</button>
       <p id="quizQuestion"></p>
@@ -233,11 +237,11 @@ header {
           if (current < questions.length) {
             loadQuestion();
           } else {
-            quizBox.innerHTML = "<p>Obrigada por lembrar da gente com tanto carinho 💖</p>";
+            quizBox.innerHTML = "<p>Obrigada por lembrar da nossa história 💖</p>";
           }
         }
       } else {
-        feedbackEl.textContent = "😒 Namoral que vc n sabe essa???";
+        feedbackEl.textContent = "Namoral que vc n sabe essa??? 😤";
       }
     }
   </script></body>
