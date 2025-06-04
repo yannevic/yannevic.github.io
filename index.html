@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erick da Nana💖</title>
+  <title>Erick e Nana💖</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
@@ -80,6 +80,7 @@
 }
 
 
+
     .quiz-box button {
       background: #d63384;
       color: white;
@@ -96,12 +97,16 @@
       background: #b32465;
     }
 
-    .feedback, #questionText, #rewardText {
-      white-space: pre-wrap;
-      border-right: 2px solid #d63384;
-      animation: typing 2s steps(40, end), blink 0.75s step-end infinite;
-      font-family: 'Courier Prime', monospace;
-    }
+    
+.feedback {
+  white-space: pre-wrap;
+  font-family: 'Courier Prime', monospace;
+}
+
+#questionText, #rewardText {
+  white-space: pre-wrap;
+  font-family: 'Courier Prime', monospace;
+}
 
     .close-btn {
       position: absolute;
@@ -114,15 +119,7 @@
       color: #d63384;
     }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: #d63384; }
-    }
+  
 
     .flower {
       position: fixed;
@@ -211,7 +208,6 @@
   type();
 }
 
-
     const questions = [
       {
         q: "Q dia a gente começou a conversar? (essa é facil)",
@@ -269,36 +265,26 @@
     function checkAnswer(i) {
       const correct = questions[currentQuestion].correct;
       if (i === correct) {
+        feedback.textContent = 'tem ctz?';
+        const yesBtn = document.createElement('button');
+        yesBtn.textContent = 'Sim';
+        yesBtn.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showReward();
+          }
+        };
+        const noBtn = document.createElement('button');
+        noBtn.textContent = 'Não';
+        noBtn.onclick = showQuestion;
         optionsContainer.innerHTML = '';
-
-        const confirmText = document.createElement('p');
-confirmText.style.marginBottom = '0.5rem';
-confirmText.style.borderRight = '2px solid #d63384';
-confirmText.style.whiteSpace = 'pre-wrap';
-confirmText.style.animation = 'typing 2s steps(40, end), blink 0.75s step-end infinite';
-confirmText.style.fontFamily = "'Courier Prime', monospace";
-optionsContainer.appendChild(confirmText);
-typeText(confirmText, 'tem ctz?');
-
-
-const yesBtn = document.createElement('button');
-yesBtn.textContent = 'Sim';
-yesBtn.onclick = () => {
-  currentQuestion++;
-  if (currentQuestion < questions.length) {
-    showQuestion();
-  } else {
-    showReward();
-  }
-};
-
-const noBtn = document.createElement('button');
-noBtn.textContent = 'Não';
-noBtn.onclick = showQuestion;
-
-optionsContainer.appendChild(yesBtn);
-optionsContainer.appendChild(noBtn);
-
+        optionsContainer.appendChild(yesBtn);
+        optionsContainer.appendChild(noBtn);
+      } else {
+        feedback.textContent = '😠 namoral que vc respondeu isso???';
+      }
     }
 
     function showReward() {
