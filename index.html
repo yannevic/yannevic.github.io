@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erick e Nana💖</title>
+  <title>Erick e Nana 💕</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
@@ -133,6 +133,306 @@
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(100vh); opacity: 0; }
     }
+
+    .leaf {
+  position: fixed;
+  top: -50px;
+  font-size: 1.5rem;
+  animation: leafFall linear infinite;
+  color: #2e8b57; /* verde folha */
+}
+
+    @keyframes leafFall {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(20px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(-20px) translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <iframe style="display:none;" width="0" height="0" src="https://www.youtube.com/embed/pdYJtRBPlTw?autoplay=1&loop=1&playlist=pdYJtRBPlTw" frameborder="0" allow="autoplay"></iframe>
+
+  <header>oii 🌹</header>
+
+  <div class="typing-container" id="typing"></div>
+
+  <div class="envelope" onclick="openQuiz()">💌</div>
+  <div class="label">Aperta aqui só se estiver ctz q conhece a gente de verdade blz!!!</div>
+
+  <div class="popup" id="quizPopup">
+    <div class="quiz-box">
+      <button class="close-btn" onclick="closeQuiz()">✕</button>
+      <p id="questionText"></p>
+      <div id="optionsContainer"></div>
+      <div class="feedback" id="feedback"></div>
+      <div id="rewardArea" style="display:none; text-align:center; margin-top:1rem;">
+        <p id="rewardText"></p>
+        <div style="font-size:3rem;cursor:pointer;" onclick="toggleCode()">🎁</div>
+        <p id="codeText" style="display:none;"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const introTexts = [
+      "só queria criar uma lembrancinha nessa data e fazer algo especial pra vc\n\n",
+      "espero que goste.. obg chat GPT 💖"
+    ];
+
+    const typingContainer = document.getElementById('typing');
+    let textIndex = 0;
+    let charIndex = 0;
+
+    function typeIntro() {
+      if (textIndex >= introTexts.length) return;
+      const text = introTexts[textIndex];
+      if (charIndex < text.length) {
+        typingContainer.textContent += text.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeIntro, 70);
+      } else {
+        textIndex++;
+        charIndex = 0;
+        setTimeout(typeIntro, 600);
+      }
+    }
+
+    typeIntro();
+
+    const quizPopup = document.getElementById('quizPopup');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const feedback = document.getElementById('feedback');
+    const rewardArea = document.getElementById('rewardArea');
+    const rewardText = document.getElementById('rewardText');
+    const codeText = document.getElementById('codeText');
+
+    function typeText(element, text, callback) {
+  element.textContent = '';
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 50); // velocidade de digitação
+    } else if (callback) {
+      callback();
+    }
+  }
+  type();
+}
+
+    const questions = [
+      {
+        q: "Q dia a gente começou a conversar? (essa é facil)",
+        options: ["2", "7", "10"],
+        correct: 0
+      },
+      {
+        q: "Que dia vc falou q me amava pela 1x?",
+        options: ["10", "17", "27"],
+        correct: 1
+      },
+      {
+        q: "Qual minha comida favorita",
+        options: ["Hambúrguer", "Pizza", "Lasanha"],
+        correct: 0
+      },
+       {
+        q: "O que vc mais ama no mundo",
+        options: ["Nana", "Valorant", "Dias"],
+        correct: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    function openQuiz() {
+      quizPopup.style.display = 'flex';
+      document.querySelector('.envelope').style.display = 'none';
+      document.querySelector('.label').style.display = 'none';
+      currentQuestion = 0;
+      showQuestion();
+    }
+
+    function closeQuiz() {
+      quizPopup.style.display = 'none';
+      document.querySelector('.envelope').style.display = 'block';
+      document.querySelector('.label').style.display = 'block';
+    }
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      optionsContainer.innerHTML = '';
+      feedback.textContent = '';
+      typeText(questionText, q.q);
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erick e Nana 💕</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Courier Prime', monospace;
+      background: #fffafc;
+      color: #d63384;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      margin-top: 3rem;
+      font-size: 1.8rem;
+      color: #d63384;
+    }
+
+    .typing-container {
+      width: 90%;
+      max-width: 600px;
+      margin: 1rem auto;
+      font-size: 1.1rem;
+      white-space: pre-wrap;
+      text-align: left;
+      min-height: 160px;
+    }
+
+    .envelope {
+      font-size: 4rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.3s;
+      z-index: 1;
+      position: relative;
+    }
+
+    .envelope:hover {
+      transform: scale(1.2);
+    }
+
+    .label {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #b32465;
+      position: relative;
+      z-index: 1;
+      user-select: none;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .quiz-box {
+  background: #fff;
+  padding: 3.5rem 2rem 2rem 2rem; /* topo aumentado para não colidir com o botão */
+  border: 6px dashed #d63384;
+  border-radius: 24px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 25px rgba(0,0,0,0.2);
+  text-align: left;
+  position: relative;
+  z-index: 11;
+  min-height: 280px;
+}
+
+
+
+    .quiz-box button {
+      background: #d63384;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 0.5rem 0.5rem 0 0;
+      font-family: 'Courier Prime', monospace;
+      font-weight: bold;
+    }
+
+    .quiz-box button:hover {
+      background: #b32465;
+    }
+
+    
+.feedback {
+  white-space: pre-wrap;
+  font-family: 'Courier Prime', monospace;
+}
+
+#questionText, #rewardText {
+  white-space: pre-wrap;
+  font-family: 'Courier Prime', monospace;
+}
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #d63384;
+    }
+
+  
+
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 1.5rem;
+      animation: fall linear infinite;
+      color: #d63384;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    .leaf {
+  position: fixed;
+  top: -50px;
+  font-size: 1.5rem;
+  animation: leafFall linear infinite;
+  color: #2e8b57; /* verde folha */
+}
+
+    @keyframes leafFall {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(20px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(-20px) translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -317,6 +617,100 @@
       setTimeout(() => flower.remove(), 5000);
     }
     setInterval(createFlower, 500);
+
+    function createLeaf() {
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf'; // agora é 'leaf', não mais 'flower'
+  leaf.textContent = '🍃';
+  leaf.style.left = Math.random() * 100 + 'vw';
+  leaf.style.animationDuration = 3 + Math.random() * 3 + 's';
+  document.body.appendChild(leaf);
+  setTimeout(() => leaf.remove(), 6000);
+}
+setInterval(createLeaf, 700);
+
+
+  </script>
+</body>
+</html>
+
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(i) {
+      const correct = questions[currentQuestion].correct;
+      if (i === correct) {
+        feedback.textContent = 'tem ctz?';
+        const yesBtn = document.createElement('button');
+        yesBtn.textContent = 'Sim';
+        yesBtn.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showReward();
+          }
+        };
+        const noBtn = document.createElement('button');
+        noBtn.textContent = 'Não';
+        noBtn.onclick = showQuestion;
+        optionsContainer.innerHTML = '';
+        optionsContainer.appendChild(yesBtn);
+        optionsContainer.appendChild(noBtn);
+      } else {
+        feedback.textContent = '😠 namoral que vc respondeu isso???';
+      }
+    }
+
+    function showReward() {
+      questionText.textContent = '';
+      optionsContainer.innerHTML = '';
+      feedback.textContent = '';
+      rewardArea.style.display = 'block';
+      typeText(rewardText, 'boa mo, toma aí seu prêmio');
+
+    }
+
+    function toggleCode() {
+  if (codeText.style.display === 'none') {
+    codeText.style.display = 'block';
+    typeText(codeText, 'Feliz dia dos Namorado p meu nao-namorado, amo vc, cola ai no seu vava vai -> codigo-123456789');
+  } else {
+    codeText.style.display = 'none';
+    codeText.textContent = ''; // limpa o texto quando fecha
+  }
+}
+
+    // Flores caindo
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.className = 'flower';
+      flower.textContent = '🌸';
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = 2 + Math.random() * 3 + 's';
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 5000);
+    }
+    setInterval(createFlower, 500);
+
+    function createLeaf() {
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf'; // agora é 'leaf', não mais 'flower'
+  leaf.textContent = '🍃';
+  leaf.style.left = Math.random() * 100 + 'vw';
+  leaf.style.animationDuration = 3 + Math.random() * 3 + 's';
+  document.body.appendChild(leaf);
+  setTimeout(() => leaf.remove(), 6000);
+}
+setInterval(createLeaf, 700);
+
+
   </script>
 </body>
 </html>
