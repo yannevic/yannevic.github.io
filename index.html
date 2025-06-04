@@ -4,46 +4,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pra vc 💖</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #fffafc;
-      color: #333;
-      text-align: center;
-      overflow-x: hidden;
-    }header {
+    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');body {
+  margin: 0;
+  font-family: 'Courier Prime', monospace;
+  background: #fffafc;
+  color: #d63384;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+header {
   margin-top: 3rem;
   font-size: 1.8rem;
   color: #d63384;
   animation: fadeIn 2s ease-in-out;
 }
 
-.typing {
+.typing-container {
   width: 90%;
   max-width: 600px;
-  margin: 2rem auto 1rem;
+  margin: 2rem auto;
   font-size: 1.1rem;
-  white-space: nowrap;
+  white-space: pre-wrap;
   overflow: hidden;
   border-right: 2px solid #d63384;
-  animation: typing 4s steps(40, end), blink 0.8s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink {
-  from, to { border-color: transparent }
-  50% { border-color: #d63384; }
-}
-
-p {
-  max-width: 600px;
-  margin: 1rem auto;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-family: 'Courier Prime', monospace;
+  text-align: left;
 }
 
 .envelope {
@@ -51,6 +37,8 @@ p {
   cursor: pointer;
   margin-top: 2rem;
   transition: transform 0.3s;
+  z-index: 2;
+  position: relative;
 }
 
 .envelope:hover {
@@ -60,7 +48,7 @@ p {
 .label {
   margin-top: 1rem;
   font-size: 1.1rem;
-  color: #555;
+  color: #b32465;
 }
 
 .popup {
@@ -124,13 +112,27 @@ p {
   color: #d63384;
 }
 
+.heart {
+  position: fixed;
+  top: -50px;
+  color: #d63384;
+  font-size: 1.5rem;
+  animation: fall linear infinite;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
   </style>
 </head>
 <body>
-  <header>oii 🌹</header>  <div class="typing">só queria criar uma lembrancinha nessa data e fazer algo especial pra vc</div>  <p>
-    Eu queria te lembrar de como vc é especial. Essa música me faz pensar em nós, no quanto certos momentos se tornam eternos na memória da gente.<br><br>
-    Espero que esse carinho chegue aí do jeitinho que pensei. 💖
-  </p>  <div class="envelope" onclick="openQuiz()">💌</div>
+  <audio autoplay loop>
+    <source src="https://open.spotify.com/artist/0llIp92s72MGxqoJviNjGC" type="audio/mp3">
+    Seu navegador não suporta áudio.
+  </audio>  <header>oii 🌹</header>  <div class="typing-container" id="typing"></div>  <div class="envelope" onclick="openQuiz()">💌</div>
   <div class="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>  <div class="popup" id="quizPopup">
     <div class="quiz-box" id="quizBox">
       <button class="close-btn" onclick="closeQuiz()">×</button>
@@ -145,20 +147,48 @@ p {
     const optionsEl = document.getElementById("options");
     const feedbackEl = document.getElementById("feedback");
 
+    const text = `só queria criar uma lembrancinha nessa data e fazer algo especial pra vc.\n\nEu queria te lembrar de como vc é especial. Essa música me faz pensar em nós, no quanto certos momentos se tornam eternos na memória da gente.\n\nEspero que esse carinho chegue aí do jeitinho que pensei. 💖`;
+
+    let i = 0;
+    const speed = 40;
+
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typing").textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    window.onload = () => {
+      typeWriter();
+      generateHearts();
+    };
+
+    function generateHearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "🌸";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+      }
+    }
+
     const questions = [
       {
-        q: "Qual foi a nossa primeira conversa mais marcante?",
-        options: ["Sobre filmes", "Sobre jogo", "Sobre vida e sentimentos"],
-        correct: 2
+        q: "Q dia a gente começou a conversar? (essa é facil)",
+        options: ["2", "7", "10"],
+        correct: 0
       },
       {
-        q: "O que te fez sorrir por minha causa pela primeira vez?",
-        options: ["Minha risada", "Uma mensagem fofa", "Meu jeito bobinho"],
+        q: "Que dia vc falou q me amava pela 1x?",
+        options: ["10", "17", "27"],
         correct: 1
       },
       {
-        q: "Se pudesse reviver um momento nosso, qual seria?",
-        options: ["Nosso primeiro call", "Nosso abraço", "A primeira piada interna"],
+        q: "Qual minha comida favorita",
+        options: ["Hambúrguer", "Pizza", "Lasanha"],
         correct: 0
       }
     ];
