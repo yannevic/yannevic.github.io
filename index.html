@@ -1,160 +1,387 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pra vc 💖</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');body {
-  margin: 0;
-  font-family: 'Courier Prime', monospace;
-  background: #fffafc;
-  color: #d63384;
-  text-align: center;
-  overflow-x: hidden;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
-header {
-  margin-top: 3rem;
-  font-size: 1.8rem;
-  color: #d63384;
-  animation: fadeIn 2s ease-in-out;
-}
+    body {
+      margin: 0;
+      font-family: 'Courier Prime', monospace;
+      background: #fffafc;
+      color: #d63384;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
-.typing-container {
-  width: 90%;
-  max-width: 600px;
-  margin: 2rem auto;
-  font-size: 1.1rem;
-  white-space: pre-wrap;
-  overflow: hidden;
-  border-right: 2px solid #d63384;
-  font-family: 'Courier Prime', monospace;
-  text-align: left;
-}
+    header {
+      margin-top: 3rem;
+      font-size: 1.8rem;
+      color: #d63384;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-.envelope {
-  font-size: 4rem;
-  cursor: pointer;
-  margin-top: 2rem;
-  transition: transform 0.3s;
-  z-index: 1;
-  position: relative;
-}
+    .typing-container {
+      width: 90%;
+      max-width: 600px;
+      margin: 2rem auto;
+      font-size: 1.1rem;
+      white-space: pre-wrap;
+      overflow: hidden;
+      border-right: 2px solid #d63384;
+      font-family: 'Courier Prime', monospace;
+      text-align: left;
+      min-height: 130px;
+    }
 
-.envelope:hover {
-  transform: scale(1.2);
-}
+    .envelope {
+      font-size: 4rem;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: transform 0.3s;
+      z-index: 1;
+      position: relative;
+    }
 
-.label {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  color: #b32465;
-  position: relative;
-  z-index: 1;
-}
+    .envelope:hover {
+      transform: scale(1.2);
+    }
 
-.popup, .reward-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
+    .label {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #b32465;
+      position: relative;
+      z-index: 1;
+      user-select: none;
+    }
 
-.quiz-box, .reward-box {
-  background: #fff;
-  padding: 2rem;
-  border: 6px dashed #d63384;
-  border-radius: 24px;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 0 25px rgba(0,0,0,0.2);
-  text-align: left;
-  position: relative;
-  animation: slideUp 0.5s ease-out;
-  z-index: 11;
-}
+    /* POPUP BACKGROUND */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
 
-@keyframes slideUp {
-  from { transform: translateY(50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+    /* QUIZ & REWARD BOX */
+    .quiz-box {
+      background: #fff;
+      padding: 2rem;
+      border: 6px dashed #d63384;
+      border-radius: 24px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+      text-align: left;
+      position: relative;
+      animation: slideUp 0.5s ease-out;
+      z-index: 11;
+      min-height: 280px;
+    }
 
-.quiz-box p, .reward-box p {
-  margin-bottom: 1rem;
-}
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-.quiz-box button, .reward-box button {
-  background: #d63384;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 0.5rem 0.5rem 0 0;
-}
+    .quiz-box p {
+      margin-bottom: 1rem;
+      font-family: 'Courier Prime', monospace;
+      white-space: pre-wrap;
+      border-right: 2px solid #d63384;
+      animation: typing 2s steps(40, end), blink 0.75s step-end infinite;
+      min-height: 48px;
+    }
 
-.feedback {
-  font-style: italic;
-  color: #d63384;
-  margin-top: 0.5rem;
-}
+    /* BUTTONS */
+    .quiz-box button {
+      background: #d63384;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 0.5rem 0.5rem 0 0;
+      font-family: 'Courier Prime', monospace;
+      font-weight: bold;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .quiz-box button:hover {
+      background: #b32465;
+    }
 
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #d63384;
-}
+    /* FEEDBACK */
+    .feedback {
+      font-style: italic;
+      color: #d63384;
+      margin-top: 0.5rem;
+      font-family: 'Courier Prime', monospace;
+      min-height: 24px;
+      white-space: pre-wrap;
+      border-right: 2px solid #d63384;
+      animation: typing 1.5s steps(40, end), blink 0.75s step-end infinite;
+    }
 
-.heart {
-  position: fixed;
-  top: -50px;
-  color: #d63384;
-  font-size: 1.5rem;
-  animation: fall linear infinite;
-  z-index: 0;
-}
+    /* CLOSE BUTTON */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #d63384;
+      user-select: none;
+    }
 
-@keyframes fall {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
-}
+    /* FALLING HEARTS */
+    .heart {
+      position: fixed;
+      top: -50px;
+      color: #d63384;
+      font-size: 1.5rem;
+      animation: fall linear infinite;
+      z-index: 0;
+      user-select: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
 
-.typing-effect {
-  white-space: pre-wrap;
-  overflow: hidden;
-  border-right: 2px solid #d63384;
-  animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
-}
+    /* TYPING ANIMATION */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #d63384; }
+    }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink {
-  from, to { border-color: transparent }
-  50% { border-color: #d63384; }
-}
-
-.big-emoji {
-  font-size: 3rem;
-  cursor: pointer;
-  display: inline-block;
-  margin-top: 1rem;
-}
+    /* BIG EMOJI */
+    .big-emoji {
+      font-size: 3rem;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 1rem;
+      user-select: none;
+    }
 
   </style>
 </head>
-<body>  <!-- Música de fundo (YouTube incorporado) -->  <iframe style="display:none;" width="0" height="0" src="https://www.youtube.com/embed/pdYJtRBPlTw?autoplay=1&loop=1&playlist=pdYJtRBPlTw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>  <header>oii 🌹</header>  <div class="typing-container" id="typing"></div>  <div class="envelope" id="envelope" onclick="openQuiz()">💌</div>
-  <div class="label" id="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>  <!-- (restante do conteúdo continua) -->
+<body>
+
+  <!-- Música de fundo lofi "Rain" do Lee via YouTube (oculto) -->
+  <iframe style="display:none;" width="0" height="0" src="https://www.youtube.com/embed/pdYJtRBPlTw?autoplay=1&loop=1&playlist=pdYJtRBPlTw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+  <header>oii 🌹</header>
+
+  <div class="typing-container" id="typing"></div>
+
+  <div class="envelope" id="envelope" onclick="openQuiz()">💌</div>
+  <div class="label" id="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>
+
+  <!-- POPUP DO QUIZ + PRÊMIO -->
+  <div class="popup" id="quizPopup">
+    <div class="quiz-box">
+      <button class="close-btn" onclick="closeQuiz()">✕</button>
+      <p id="questionText"></p>
+      <div id="optionsContainer"></div>
+      <div class="feedback" id="feedback"></div>
+
+      <!-- Área do prêmio, inicialmente escondida -->
+      <div id="rewardArea" style="display:none; text-align:center; margin-top:1rem;">
+        <p id="rewardText" style="margin-bottom:0.5rem;"></p>
+        <div class="big-emoji" id="giftEmoji" onclick="toggleCode()">🎁</div>
+        <p id="codeText" style="font-family: 'Courier Prime', monospace; font-size: 1.2rem; user-select:none; margin-top: 0.5rem; cursor: default; display:none;">codigo-123456789</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Textos para o typing na intro
+    const introTexts = [
+      "só queria criar uma lembrancinha nessa data e fazer algo especial pra vc\n\n",
+      "espero que goste... 💖"
+    ];
+
+    const typingContainer = document.getElementById('typing');
+    let currentIntroIndex = 0;
+    let currentCharIndex = 0;
+
+    function typeIntro() {
+      if(currentIntroIndex >= introTexts.length) return;
+      const text = introTexts[currentIntroIndex];
+      if(currentCharIndex < text.length){
+        typingContainer.textContent += text.charAt(currentCharIndex);
+        currentCharIndex++;
+        setTimeout(typeIntro, 70);
+      } else {
+        currentIntroIndex++;
+        currentCharIndex = 0;
+        setTimeout(typeIntro, 600);
+      }
+    }
+    typeIntro();
+
+    // Perguntas do quiz
+    const questions = [
+      {
+        q: "Q dia a gente começou a conversar? (essa é facil)",
+        options: ["2", "7", "10"],
+        correct: 0
+      },
+      {
+        q: "Que dia vc falou q me amava pela 1x?",
+        options: ["10", "17", "27"],
+        correct: 1
+      },
+      {
+        q: "Qual minha comida favorita",
+        options: ["Hambúrguer", "Pizza", "Lasanha"],
+        correct: 0
+      }
+    ];
+
+    const quizPopup = document.getElementById('quizPopup');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const feedback = document.getElementById('feedback');
+    const envelope = document.getElementById('envelope');
+    const label = document.getElementById('label');
+
+    // Prêmio elementos
+    const rewardArea = document.getElementById('rewardArea');
+    const rewardText = document.getElementById('rewardText');
+    const giftEmoji = document.getElementById('giftEmoji');
+    const codeText = document.getElementById('codeText');
+
+    let currentQuestion = 0;
+    let codeVisible = false;
+
+    function openQuiz(){
+      quizPopup.style.display = 'flex';
+      envelope.style.zIndex = '0'; // manda envelope pra trás
+      label.style.zIndex = '0';
+      currentQuestion = 0;
+      feedback.textContent = '';
+      rewardArea.style.display = 'none';
+      giftEmoji.style.display = 'none';
+      codeText.style.display = 'none';
+      showQuestion();
+    }
+
+    function closeQuiz(){
+      quizPopup.style.display = 'none';
+      envelope.style.zIndex = '1';
+      label.style.zIndex = '1';
+    }
+
+    // Função para digitar texto com efeito
+    function typeText(element, text, callback){
+      element.textContent = '';
+      let i = 0;
+      function type(){
+        if(i < text.length){
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 40);
+        } else if(callback) {
+          callback();
+        }
+      }
+      type();
+    }
+
+    // Mostrar questão atual
+    function showQuestion(){
+      feedback.textContent = '';
+      optionsContainer.innerHTML = '';
+      rewardArea.style.display = 'none';
+      giftEmoji.style.display = 'none';
+      codeText.style.display = 'none';
+
+      typeText(questionText, questions[currentQuestion].q, () => {
+        questions[currentQuestion].options.forEach((option, i) => {
+          const btn = document.createElement('button');
+          btn.textContent = option;
+          btn.onclick = () => checkAnswer(i);
+          optionsContainer.appendChild(btn);
+        });
+      });
+    }
+
+    // Checar resposta selecionada
+    function checkAnswer(selected){
+      const correct = questions[currentQuestion].correct;
+
+      // Limpar opções e desabilitar click para evitar múltiplos cliques
+      Array.from(optionsContainer.children).forEach(btn => btn.disabled = true);
+
+      if(selected === correct){
+        // Pergunta correta: mostrar dúvida com sim/não
+        feedback.textContent = '';
+        typeText(feedback, "tem ctz? (confirma aí com sim ou não)", () => {
+          showConfirmOptions();
+        });
+      } else {
+        // Errado: mostrar frase com carinha brava
+        feedback.textContent = '';
+        typeText(feedback, "😠 namoral que vc n sabe essa???", () => {
+          setTimeout(() => {
+            feedback.textContent = '';
+            showQuestion(); // Repete a pergunta para tentar de novo
+            // Re-habilitar os botões
+            Array.from(optionsContainer.children).forEach(btn => btn.disabled = false);
+          }, 1800);
+        });
+      }
+    }
+
+    // Mostrar botões de confirmação sim/não
+    function showConfirmOptions(){
+      optionsContainer.innerHTML = '';
+      const simBtn = document.createElement('button');
+      simBtn.textContent = 'Sim';
+      const naoBtn = document.createElement('button');
+      naoBtn.textContent = 'Não';
+
+      simBtn.onclick = () => {
+        currentQuestion++;
+        if(currentQuestion >= questions.length){
+          showReward();
+        } else {
+          feedback.textContent = '';
+          showQuestion();
+        }
+      };
+
+      naoBtn.onclick = () => {
+        feedback.textContent = '';
+        showQuestion();
+      };
+
+      optionsContainer.appendChild(simBtn);
+      optionsContainer.appendChild(naoBtn);
+    }
+
+    // Mostrar prêmio final
+    function showReward(){
+      questionText.textContent = '';
+      optionsContainer.innerHTML = '';
+      feedback.textContent = '';
+
+      rewardText.style.borderRight = '2px solid #d63384';
+      rewardText.style.whiteSpace = 'pre-wrap';
+      rewardText.textContent = '';
+      typeText(rewardText, "parabéns
