@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pra vc 💖</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
@@ -20,7 +20,6 @@
       margin-top: 3rem;
       font-size: 1.8rem;
       color: #d63384;
-      animation: fadeIn 2s ease-in-out;
     }
 
     .typing-container {
@@ -29,10 +28,8 @@
       margin: 2rem auto;
       font-size: 1.1rem;
       white-space: pre-wrap;
-      overflow: hidden;
-      border-right: 2px solid #d63384;
-      font-family: 'Courier Prime', monospace;
       text-align: left;
+      min-height: 160px;
     }
 
     .envelope {
@@ -54,22 +51,21 @@
       color: #b32465;
       position: relative;
       z-index: 1;
+      user-select: none;
     }
 
-    .popup, .reward-popup {
+    .popup {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0,0,0,0.5);
       justify-content: center;
       align-items: center;
       z-index: 10;
     }
 
-    .quiz-box, .reward-box {
+    .quiz-box {
       background: #fff;
       padding: 2rem;
       border: 6px dashed #d63384;
@@ -79,20 +75,11 @@
       box-shadow: 0 0 25px rgba(0,0,0,0.2);
       text-align: left;
       position: relative;
-      animation: slideUp 0.5s ease-out;
       z-index: 11;
+      min-height: 280px;
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .quiz-box p, .reward-box p {
-      margin-bottom: 1rem;
-    }
-
-    .quiz-box button, .reward-box button {
+    .quiz-box button {
       background: #d63384;
       color: white;
       border: none;
@@ -100,12 +87,19 @@
       border-radius: 8px;
       cursor: pointer;
       margin: 0.5rem 0.5rem 0 0;
+      font-family: 'Courier Prime', monospace;
+      font-weight: bold;
     }
 
-    .feedback {
-      font-style: italic;
-      color: #d63384;
-      margin-top: 0.5rem;
+    .quiz-box button:hover {
+      background: #b32465;
+    }
+
+    .feedback, #questionText, #rewardText {
+      white-space: pre-wrap;
+      border-right: 2px solid #d63384;
+      animation: typing 2s steps(40, end), blink 0.75s step-end infinite;
+      font-family: 'Courier Prime', monospace;
     }
 
     .close-btn {
@@ -119,27 +113,6 @@
       color: #d63384;
     }
 
-    .heart {
-      position: fixed;
-      top: -50px;
-      color: #d63384;
-      font-size: 1.5rem;
-      animation: fall linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
-    }
-
-    .typing-effect {
-      white-space: pre-wrap;
-      overflow: hidden;
-      border-right: 2px solid #d63384;
-      animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
-    }
-
     @keyframes typing {
       from { width: 0 }
       to { width: 100% }
@@ -150,24 +123,174 @@
       50% { border-color: #d63384; }
     }
 
-    .big-emoji {
-      font-size: 3rem;
-      cursor: pointer;
-      display: inline-block;
-      margin-top: 1rem;
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 1.5rem;
+      animation: fall linear infinite;
+      color: #d63384;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Música de fundo (YouTube incorporado) -->
-  <iframe style="display:none;" width="0" height="0" src="https://www.youtube.com/embed/pdYJtRBPlTw?autoplay=1&loop=1&playlist=pdYJtRBPlTw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe style="display:none;" width="0" height="0" src="https://www.youtube.com/embed/pdYJtRBPlTw?autoplay=1&loop=1&playlist=pdYJtRBPlTw" frameborder="0" allow="autoplay"></iframe>
 
   <header>oii 🌹</header>
 
   <div class="typing-container" id="typing"></div>
 
-  <div class="envelope" id="envelope" onclick="openQuiz()">💌</div>
-  <div class="label" id="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>
+  <div class="envelope" onclick="openQuiz()">💌</div>
+  <div class="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>
 
-  <!-- (restante do conteúdo continua) -->
+  <div class="popup" id="quizPopup">
+    <div class="quiz-box">
+      <button class="close-btn" onclick="closeQuiz()">✕</button>
+      <p id="questionText"></p>
+      <div id="optionsContainer"></div>
+      <div class="feedback" id="feedback"></div>
+      <div id="rewardArea" style="display:none; text-align:center; margin-top:1rem;">
+        <p id="rewardText"></p>
+        <div style="font-size:3rem;cursor:pointer;" onclick="toggleCode()">🎁</div>
+        <p id="codeText" style="display:none;">codigo-123456789</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const introTexts = [
+      "só queria criar uma lembrancinha nessa data e fazer algo especial pra vc\n\n",
+      "espero que goste... 💖"
+    ];
+
+    const typingContainer = document.getElementById('typing');
+    let textIndex = 0;
+    let charIndex = 0;
+
+    function typeIntro() {
+      if (textIndex >= introTexts.length) return;
+      const text = introTexts[textIndex];
+      if (charIndex < text.length) {
+        typingContainer.textContent += text.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeIntro, 70);
+      } else {
+        textIndex++;
+        charIndex = 0;
+        setTimeout(typeIntro, 600);
+      }
+    }
+
+    typeIntro();
+
+    const quizPopup = document.getElementById('quizPopup');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const feedback = document.getElementById('feedback');
+    const rewardArea = document.getElementById('rewardArea');
+    const rewardText = document.getElementById('rewardText');
+    const codeText = document.getElementById('codeText');
+
+    const questions = [
+      {
+        q: "Q dia a gente começou a conversar? (essa é facil)",
+        options: ["2", "7", "10"],
+        correct: 0
+      },
+      {
+        q: "Que dia vc falou q me amava pela 1x?",
+        options: ["10", "17", "27"],
+        correct: 1
+      },
+      {
+        q: "Qual minha comida favorita",
+        options: ["Hambúrguer", "Pizza", "Lasanha"],
+        correct: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    function openQuiz() {
+      quizPopup.style.display = 'flex';
+      document.querySelector('.envelope').style.display = 'none';
+      document.querySelector('.label').style.display = 'none';
+      currentQuestion = 0;
+      showQuestion();
+    }
+
+    function closeQuiz() {
+      quizPopup.style.display = 'none';
+      document.querySelector('.envelope').style.display = 'block';
+      document.querySelector('.label').style.display = 'block';
+    }
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      questionText.textContent = q.q;
+      optionsContainer.innerHTML = '';
+      feedback.textContent = '';
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(i) {
+      const correct = questions[currentQuestion].correct;
+      if (i === correct) {
+        feedback.textContent = 'tem ctz?';
+        const yesBtn = document.createElement('button');
+        yesBtn.textContent = 'Sim';
+        yesBtn.onclick = () => {
+          currentQuestion++;
+          if (currentQuestion < questions.length) {
+            showQuestion();
+          } else {
+            showReward();
+          }
+        };
+        const noBtn = document.createElement('button');
+        noBtn.textContent = 'Não';
+        noBtn.onclick = showQuestion;
+        optionsContainer.innerHTML = '';
+        optionsContainer.appendChild(yesBtn);
+        optionsContainer.appendChild(noBtn);
+      } else {
+        feedback.textContent = '😠 namoral que vc n sabe essa???';
+      }
+    }
+
+    function showReward() {
+      questionText.textContent = '';
+      optionsContainer.innerHTML = '';
+      feedback.textContent = '';
+      rewardArea.style.display = 'block';
+      rewardText.textContent = 'toma aí seu prêmio';
+    }
+
+    function toggleCode() {
+      codeText.style.display = codeText.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Flores caindo
+    function createFlower() {
+      const flower = document.createElement('div');
+      flower.className = 'flower';
+      flower.textContent = '🌸';
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = 2 + Math.random() * 3 + 's';
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 5000);
+    }
+    setInterval(createFlower, 500);
+  </script>
+</body>
+</html>
