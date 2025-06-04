@@ -145,7 +145,7 @@
   <div class="typing-container" id="typing"></div>
 
   <div class="envelope" onclick="openQuiz()">💌</div>
-  <div class="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>
+  <div class="label">Aperta aqui só se estiver ctz q conhece a gente de verdade!!!</div>
 
   <div class="popup" id="quizPopup">
     <div class="quiz-box">
@@ -210,6 +210,11 @@
         q: "Qual minha comida favorita",
         options: ["Hambúrguer", "Pizza", "Lasanha"],
         correct: 0
+      },
+       {
+        q: "O que vc mais ama ni mundo",
+        options: ["Nana", "Valorant", "Dias"],
+        correct: 0
       }
     ];
 
@@ -264,7 +269,7 @@
         optionsContainer.appendChild(yesBtn);
         optionsContainer.appendChild(noBtn);
       } else {
-        feedback.textContent = '😠 namoral que vc n sabe essa???';
+        feedback.textContent = '😠 namoral que vc respondeu isso???';
       }
     }
 
@@ -273,7 +278,7 @@
       optionsContainer.innerHTML = '';
       feedback.textContent = '';
       rewardArea.style.display = 'block';
-      rewardText.textContent = 'toma aí seu prêmio';
+      rewardText.textContent = 'boa mo, toma aí seu prêmio';
     }
 
     function toggleCode() {
