@@ -196,6 +196,22 @@
     const rewardText = document.getElementById('rewardText');
     const codeText = document.getElementById('codeText');
 
+    function typeText(element, text, callback) {
+  element.textContent = '';
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 50); // velocidade de digitação
+    } else if (callback) {
+      callback();
+    }
+  }
+  type();
+}
+
+
     const questions = [
       {
         q: "Q dia a gente começou a conversar? (essa é facil)",
@@ -237,9 +253,10 @@
 
     function showQuestion() {
       const q = questions[currentQuestion];
-      questionText.textContent = q.q;
       optionsContainer.innerHTML = '';
       feedback.textContent = '';
+      typeText(questionText, q.q);
+
 
       q.options.forEach((opt, i) => {
         const btn = document.createElement('button');
