@@ -78,11 +78,13 @@ p {
 .quiz-box {
   background: #fff;
   padding: 2rem;
-  border-radius: 16px;
+  border: 6px dashed #d63384;
+  border-radius: 24px;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 0 25px rgba(0,0,0,0.2);
   text-align: left;
+  position: relative;
   animation: slideUp 0.5s ease-out;
 }
 
@@ -102,13 +104,24 @@ p {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 1rem;
+  margin: 0.5rem 0.5rem 0 0;
 }
 
 .feedback {
   font-style: italic;
   color: #d63384;
   margin-top: 0.5rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #d63384;
 }
 
   </style>
@@ -120,6 +133,7 @@ p {
   </p>  <div class="envelope" onclick="openQuiz()">💌</div>
   <div class="label">Aperta aqui só se estiver pronto pra nos conhecer de verdade...</div>  <div class="popup" id="quizPopup">
     <div class="quiz-box" id="quizBox">
+      <button class="close-btn" onclick="closeQuiz()">×</button>
       <p id="quizQuestion"></p>
       <div id="options"></div>
       <div class="feedback" id="feedback"></div>
@@ -155,6 +169,12 @@ p {
     function openQuiz() {
       popup.style.display = "flex";
       loadQuestion();
+    }
+
+    function closeQuiz() {
+      popup.style.display = "none";
+      current = 0;
+      confirmStep = false;
     }
 
     function loadQuestion() {
