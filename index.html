@@ -157,7 +157,7 @@
       <div id="rewardArea" style="display:none; text-align:center; margin-top:1rem;">
         <p id="rewardText"></p>
         <div style="font-size:3rem;cursor:pointer;" onclick="toggleCode()">🎁</div>
-        <p id="codeText" style="display:none;">Feliz dia dos Namorados p meu nao-namorado, amo vc, cola ai no seu vava vai -> codigo-123456789</p>
+        <p id="codeText" style="display:none;"></p>
       </div>
     </div>
   </div>
@@ -296,12 +296,19 @@
       optionsContainer.innerHTML = '';
       feedback.textContent = '';
       rewardArea.style.display = 'block';
-      rewardText.textContent = 'boa mo, toma aí seu prêmio';
+      typeText(rewardText, 'boa mo, toma aí seu prêmio');
+
     }
 
     function toggleCode() {
-      codeText.style.display = codeText.style.display === 'none' ? 'block' : 'none';
-    }
+  if (codeText.style.display === 'none') {
+    codeText.style.display = 'block';
+    typeText(codeText, 'Feliz dia dos Namorado p meu nao-namorado, amo vc, cola ai no seu vava vai -> codigo-123456789');
+  } else {
+    codeText.style.display = 'none';
+    codeText.textContent = ''; // limpa o texto quando fecha
+  }
+}
 
     // Flores caindo
     function createFlower() {
