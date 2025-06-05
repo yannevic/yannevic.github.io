@@ -66,18 +66,18 @@
     }
 
     .quiz-box {
-  background: #fff;
-  padding: 3.5rem 2rem 2rem 2rem; /* topo aumentado para não colidir com o botão */
-  border: 6px dashed #d63384;
-  border-radius: 24px;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 0 25px rgba(0,0,0,0.2);
-  text-align: left;
-  position: relative;
-  z-index: 11;
-  min-height: 280px;
-}
+      background: #fff;
+      padding: 3.5rem 2rem 1.5rem 2rem;
+      border: 6px dashed #d63384;
+      border-radius: 24px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+      text-align: left;
+      position: relative;
+      z-index: 11;
+      min-height: 240px;
+    }
 
     .quiz-box button {
       background: #d63384;
@@ -95,16 +95,15 @@
       background: #b32465;
     }
 
-    
-.feedback {
-  white-space: pre-wrap;
-  font-family: 'Courier Prime', monospace;
-}
+    .feedback {
+      white-space: pre-wrap;
+      font-family: 'Courier Prime', monospace;
+    }
 
-#questionText, #rewardText {
-  white-space: pre-wrap;
-  font-family: 'Courier Prime', monospace;
-}
+    #questionText, #rewardText {
+      white-space: pre-wrap;
+      font-family: 'Courier Prime', monospace;
+    }
 
     .close-btn {
       position: absolute;
@@ -116,8 +115,6 @@
       cursor: pointer;
       color: #d63384;
     }
-
-  
 
     .flower {
       position: fixed;
@@ -133,37 +130,47 @@
     }
 
     .leaf {
-  position: fixed;
-  top: -50px;
-  font-size: 1.5rem;
-  animation: leafFall linear infinite;
-  color: #2e8b57; /* verde folha */
-}
+      position: fixed;
+      top: -50px;
+      font-size: 1.5rem;
+      animation: leafFall linear infinite;
+      color: #2e8b57;
+    }
 
     @keyframes leafFall {
-  0% {
-    transform: translateX(0) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(20px) rotate(180deg);
-  }
-  100% {
-    transform: translateX(-20px) translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
+      0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+      50% { transform: translateX(20px) rotate(180deg); }
+      100% { transform: translateX(-20px) translateY(100vh) rotate(360deg); opacity: 0; }
+    }
 
+    .music-control {
+      position: fixed;
+      bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem;
+      color: #b32465;
+      z-index: 20;
+    }
+
+    .heart-btn {
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .heart-btn:hover {
+      transform: scale(1.2);
+    }
   </style>
 </head>
 <body>
-  <iframe style="display:none;" width="0" height="0" src="https://www.youtube.com/embed/pdYJtRBPlTw?autoplay=1&loop=1&playlist=pdYJtRBPlTw" frameborder="0" allow="autoplay"></iframe>
+  <iframe id="bgMusic" style="display:none;" width="0" height="0" src="https://www.youtube.com/embed/pdYJtRBPlTw?enablejsapi=1" frameborder="0" allow="autoplay"></iframe>
 
   <header>oii 🌹</header>
-
   <div class="typing-container" id="typing"></div>
-
-  <div class="envelope" onclick="openQuiz()">💌</div>
+  <div class="envelope" onclick="openQuiz()">📬</div>
   <div class="label">Aperta aqui só se tiver ctz q conhece a gente de verdade blz!!!</div>
 
   <div class="popup" id="quizPopup">
@@ -180,6 +187,12 @@
     </div>
   </div>
 
+  <div class="music-control">
+    <p>clique no coração para relaxar</p>
+    <div class="heart-btn" onclick="toggleMusic()">❤️</div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     const introTexts = [
       "Só queria criar uma lembrancinha nessa data e fazer algo especial pra vc.\n\n",
@@ -203,7 +216,6 @@
         setTimeout(typeIntro, 600);
       }
     }
-
     typeIntro();
 
     const quizPopup = document.getElementById('quizPopup');
@@ -215,41 +227,25 @@
     const codeText = document.getElementById('codeText');
 
     function typeText(element, text, callback) {
-  element.textContent = '';
-  let i = 0;
-  function type() {
-    if (i < text.length) {
-      element.textContent += text.charAt(i);
-      i++;
-      setTimeout(type, 50); // velocidade de digitação
-    } else if (callback) {
-      callback();
+      element.textContent = '';
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 50);
+        } else if (callback) {
+          callback();
+        }
+      }
+      type();
     }
-  }
-  type();
-}
 
     const questions = [
-      {
-        q: "Q dia a gente começou a conversar? (essa é facil)",
-        options: ["2", "7", "10"],
-        correct: 0
-      },
-      {
-        q: "Que dia vc falou q me amava pela 1x?",
-        options: ["10", "17", "27"],
-        correct: 1
-      },
-      {
-        q: "Qual minha comida favorita?",
-        options: ["Hambúrguer", "Pizza", "Lasanha"],
-        correct: 0
-      },
-       {
-        q: "O que vc mais ama no mundo????",
-        options: ["Nana", "Valorant", "Dias"],
-        correct: 0
-      }
+      { q: "Q dia a gente começou a conversar? (essa é facil)", options: ["2", "7", "10"], correct: 0 },
+      { q: "Que dia vc falou q me amava pela 1x?", options: ["10", "17", "27"], correct: 1 },
+      { q: "Qual minha comida favorita?", options: ["Hambúrguer", "Pizza", "Lasanha"], correct: 0 },
+      { q: "O que vc mais ama no mundo????", options: ["Nana", "Valorant", "Dias"], correct: 0 }
     ];
 
     let currentQuestion = 0;
@@ -266,6 +262,10 @@
       quizPopup.style.display = 'none';
       document.querySelector('.envelope').style.display = 'block';
       document.querySelector('.label').style.display = 'block';
+      rewardArea.style.display = 'none';
+      rewardText.textContent = '';
+      codeText.textContent = '';
+      codeText.style.display = 'none';
     }
 
     function showQuestion() {
@@ -273,7 +273,6 @@
       optionsContainer.innerHTML = '';
       feedback.textContent = '';
       typeText(questionText, q.q);
-
 
       q.options.forEach((opt, i) => {
         const btn = document.createElement('button');
@@ -314,20 +313,19 @@
       feedback.textContent = '';
       rewardArea.style.display = 'block';
       typeText(rewardText, 'boa mooo, toma aí seu prêmio:');
-
     }
 
     function toggleCode() {
-  if (codeText.style.display === 'none') {
-    codeText.style.display = 'block';
-    typeText(codeText, 'Feliz Dia dos Namorados p meu nao-namorado, amo vc, cola ai no seu vava vai (desculpa eu sou pobre 😭) -> RA-CXCLNCDNW9ACP456 ');
-  } else {
-    codeText.style.display = 'none';
-    codeText.textContent = ''; // limpa o texto quando fecha
-  }
-}
+      if (codeText.style.display === 'none') {
+        codeText.style.display = 'block';
+        typeText(codeText, 'Feliz Dia dos Namorados p meu nao-namorado, amo vc, cola ai no seu vava vai (desculpa eu sou pobre 😭) -> RA-CXCLNCDNW9ACP456 ');
+      } else {
+        codeText.style.display = 'none';
+        codeText.textContent = '';
+      }
+    }
 
-    // Flores caindo
+    // Flores e folhas
     function createFlower() {
       const flower = document.createElement('div');
       flower.className = 'flower';
@@ -340,17 +338,34 @@
     setInterval(createFlower, 500);
 
     function createLeaf() {
-  const leaf = document.createElement('div');
-  leaf.className = 'leaf'; // agora é 'leaf', não mais 'flower'
-  leaf.textContent = '🍃';
-  leaf.style.left = Math.random() * 100 + 'vw';
-  leaf.style.animationDuration = 3.2 + Math.random() * 3 + 's';
-  document.body.appendChild(leaf);
-  setTimeout(() => leaf.remove(), 6000);
-}
-setInterval(createLeaf, 300);
+      const leaf = document.createElement('div');
+      leaf.className = 'leaf';
+      leaf.textContent = '🍃';
+      leaf.style.left = Math.random() * 100 + 'vw';
+      leaf.style.animationDuration = 3.2 + Math.random() * 3 + 's';
+      document.body.appendChild(leaf);
+      setTimeout(() => leaf.remove(), 6000);
+    }
+    setInterval(createLeaf, 300);
 
+    // YouTube API player
+    let musicPlaying = false;
+    let player;
 
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('bgMusic');
+    }
+
+    function toggleMusic() {
+      if (!player) return;
+      if (musicPlaying) {
+        player.pauseVideo();
+        musicPlaying = false;
+      } else {
+        player.playVideo();
+        musicPlaying = true;
+      }
+    }
   </script>
 </body>
 </html>
