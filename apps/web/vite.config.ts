@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
+  base: '/',
   plugins: [react(), tsconfigPaths(), svgr()],
   css: {
     postcss: path.resolve(__dirname, './postcss.config.cjs'),
