@@ -1,8 +1,7 @@
-import Window from '@components/ui/window';
+import Window from '@/components/ui/window';
 import { useState } from 'react';
 import studiesNana from '@/assets/estudos.png';
 import book from '@/assets/svgs/book.svg';
-import folha from '@/assets//book/folha-right.svg';
 import html from '@/assets/book/html.png';
 import css from '@/assets/book/css.png';
 import js from '@/assets/book/js.png';

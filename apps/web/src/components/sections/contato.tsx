@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Window from '@components/ui/window';
-import { Button } from '@components/ui/button';
-import CustomInput from '@components/ui/input';
+import Window from '@/components/ui/window';
+import { Button } from '@/components/ui/button';
+import CustomInput from '@/components/ui/input';
 import sound from '@/assets/sounds/send.mp3';
 import atencao from '@/assets/sounds/atencao.mp3';
 

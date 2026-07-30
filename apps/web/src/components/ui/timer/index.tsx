@@ -1,5 +1,5 @@
-import Window from '@components/ui/window';
-import useCurrentTime from '@utils/useCurrentTime';
+import Window from '@/components/ui/window';
+import useCurrentTime from '@/utils/useCurrentTime';
 import { useState } from 'react';
 import calendar from '@/assets/calendar.png';
 import clock from '@/assets/clock.png';

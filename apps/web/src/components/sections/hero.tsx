@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Window from '@components/ui/window';
-import { Button } from '@components/ui/button';
+import Window from '@/components/ui/window';
+import { Button } from '@/components/ui/button';
 import sound from '@/assets/sounds/msn.mp3';
 import heroNana from '@/assets/hero.png';
 import linkedin from '@/assets/linkedin.png';

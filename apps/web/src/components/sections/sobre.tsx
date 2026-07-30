@@ -1,4 +1,4 @@
-import Window from '@components/ui/window';
+import Window from '@/components/ui/window';
 import aboutNana from '@/assets/sobre.png';
 import cn from '@/utils/cn';
 

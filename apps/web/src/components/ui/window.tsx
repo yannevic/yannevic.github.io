@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Button } from '@components/ui/button/index';
-import cn from '@utils/cn';
+import { Button } from '@/components/ui/button/index';
+import cn from '@/utils/cn';
 import WindowDetail from '@/assets/svgs/windowdetail.svg?react';
 
 interface WindowWrapperProps extends React.HTMLAttributes<HTMLDivElement> {

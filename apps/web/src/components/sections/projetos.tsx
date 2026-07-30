@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Window from '@components/ui/window';
+import Window from '@/components/ui/window';
 import folder from '@/assets/folder.png';
 import folderEmpty from '@/assets/folder1.png';
 import cn from '@/utils/cn';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import cn from '@utils/cn';
-import { Button } from '@components/ui/button';
+import cn from '@/utils/cn';
+import { Button } from '@/components/ui/button';
 import TabDefault from '@/assets/svgs/tab-default.svg?react';
 import ActiveNavTab from '../ui/activeNavTab';
 
