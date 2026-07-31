@@ -33,12 +33,12 @@ jobs:
         run: npm ci
 
       - name: Build web
-        run: npm run build --workspace=web
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/web/dist
+          path: dist
 
   deploy:
     needs: build

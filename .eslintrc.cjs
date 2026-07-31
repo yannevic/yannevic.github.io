@@ -7,13 +7,13 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: { jsx: true },
-    project: path.resolve(__dirname, 'apps/web/tsconfig.app.json'),
+    project: path.resolve(__dirname, 'tsconfig.app.json'),
   },
   settings: {
     react: { version: 'detect' },
     'import/resolver': {
       typescript: {
-        project: path.resolve(__dirname, 'apps/web/tsconfig.app.json'),
+        project: path.resolve(__dirname, 'tsconfig.app.json'),
       },
     },
   },
@@ -51,10 +51,7 @@ module.exports = {
         devDependencies: true,
         optionalDependencies: false,
         peerDependencies: false,
-        packageDir: [
-          path.resolve(__dirname, 'apps/web'),
-          path.resolve(__dirname), // raiz do monorepo
-        ],
+        packageDir: [path.resolve(__dirname)],
       },
     ],
     '@typescript-eslint/no-unused-vars': ['warn'],
@@ -80,7 +77,7 @@ module.exports = {
     {
       files: ['*.cjs'],
       parserOptions: {
-        project: path.resolve(__dirname, 'apps/web/tsconfig.node.json'),
+        project: path.resolve(__dirname, 'tsconfig.node.json'),
       },
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
@@ -95,7 +92,7 @@ module.exports = {
     {
       files: ['vite.config.ts'],
       parserOptions: {
-        project: path.resolve(__dirname, 'apps/web/tsconfig.node.json'),
+        project: path.resolve(__dirname, 'tsconfig.node.json'),
       },
       rules: {
         'import/no-extraneous-dependencies': 'off',

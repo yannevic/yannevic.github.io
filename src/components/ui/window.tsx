@@ -36,15 +36,15 @@ const WindowWrapper = React.forwardRef<HTMLDivElement, WindowWrapperProps>(
       <div
         ref={ref}
         className={cn(
-          'flex flex-col shadow-[var(--shadow-window)] rounded-[8px] relative min-w-[50px] border-[2px] border-[#221208]',
+          'flex flex-col shadow-(--shadow-window) rounded-lg relative min-w-12.5 border-2 border-[#221208]',
           className,
-          isBaloonChat ? '' : 'rounded-[8px] overflow-clip'
+          isBaloonChat ? '' : 'rounded-lg overflow-clip'
         )}
         {...props}
       >
         <div
           className={cn(
-            'px-[14px] py-[12px] w-full h-[50px] gap-[20px] flex flex-row items-center justify-between rounded-t-[8px] border-b-[2px]  border-[#221208]',
+            'px-3.5 py-3 w-full h-12.5 gap-5 flex flex-row items-center justify-between rounded-t-lg border-b-2  border-[#221208]',
             windowTitle ? 'justify-between' : 'justify-end',
             headerClasses,
             variant === 'pink' ? 'bg-[#E9D3DF]' : 'bg-[#82AADE]'
@@ -57,17 +57,17 @@ const WindowWrapper = React.forwardRef<HTMLDivElement, WindowWrapperProps>(
           )}
 
           {showButtons ? (
-            <div className="flex flex-row gap-[5px]">
+            <div className="flex flex-row gap-1.25">
               <Button
                 asChild={false}
-                className="p-[10px] w-[20px] h-[20px] gap-[10px] rounded-[3px] border-[1px] bg-[#F2F2E8]"
+                className="p-2.5 w-5 h-5 gap-2.5 rounded-[3px] border bg-[#F2F2E8]"
               >
                 _
               </Button>
 
               <Button
                 asChild={false}
-                className="p-[10px] w-[20px] h-[20px] gap-[10px] rounded-[3px] border-[1px] bg-[#F2F2E8]"
+                className="p-2.5 w-5 h-5 gap-2.5 rounded-[3px] border bg-[#F2F2E8]"
               >
                 □
               </Button>
@@ -75,20 +75,20 @@ const WindowWrapper = React.forwardRef<HTMLDivElement, WindowWrapperProps>(
                 type="button"
                 onClick={closeButton}
                 asChild={false}
-                className="p-[10px] w-[20px] h-[20px] gap-[10px] rounded-[3px] border-[1px] bg-[#F2F2E8] transition duration-300 ease-in-out hover:cursor-pointer hover:scale-[1.05]"
+                className="p-2.5 w-5 h-5 gap-2.5 rounded-[3px] border bg-[#F2F2E8] transition duration-300 ease-in-out hover:cursor-pointer hover:scale-[1.05]"
               >
                 X
               </Button>
             </div>
           ) : (
-            <div className="flex flex-row gap-[5px]">
+            <div className="flex flex-row gap-1.25">
               {[...Array(3)].map((_, index) => (
                 <Button
                   // eslint-disable-next-line react/no-array-index-key
                   key={`button-${index}`}
                   asChild={false}
                   className={cn(
-                    'p-[10px] w-[20px] h-[20px] gap-[10px] rounded-[3px] border-[1px]',
+                    'p-2.5 w-5 h-5 gap-2.5 rounded-[3px] border',
                     variant === 'pink' ? 'bg-[#E9D3DF]' : 'bg-[#82AADE]'
                   )}
                 />
@@ -97,10 +97,10 @@ const WindowWrapper = React.forwardRef<HTMLDivElement, WindowWrapperProps>(
           )}
         </div>
 
-        <div className=" w-full min-h-[50px]  rounded-bl-[4px] bg-[#F2F2E8]">{children}</div>
+        <div className=" w-full min-h-12.5  rounded-bl-sm bg-[#F2F2E8]">{children}</div>
 
         {isBaloonChat ? (
-          <WindowDetail className="absolute -bottom-[39px] right-[0] fill-white w-[40px] h-[40px] " />
+          <WindowDetail className="absolute -bottom-9.75 right-0 fill-white w-10 h-10 " />
         ) : (
           ''
         )}

@@ -1,10 +1,10 @@
 # Portfólio da Nana
 
-Este é meu portifólio como monorepo **atualmente estou trabalhando no front-end.**
+Este é meu portifólio **atualmente estou trabalhando no front-end.**
 
 ---
 
-## Run in project root
+## Run in project
 
 ```
 npm run dev

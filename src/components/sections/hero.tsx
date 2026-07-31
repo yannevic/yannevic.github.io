@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import Window from '@/components/ui/window';
 import { Button } from '@/components/ui/button';
 import sound from '@/assets/sounds/msn.mp3';
 import heroNana from '@/assets/hero.png';
 import linkedin from '@/assets/linkedin.png';
 import github from '@/assets/github.png';
 import whatsapp from '@/assets/whatsapp.png';
+import Window from '@/components/ui/window';
 import curriculo from '@/assets/curriculo.png';
 
 function HeroSection() {
@@ -32,7 +32,11 @@ function HeroSection() {
       img: whatsapp,
       link: `https://wa.me/5568999303331?text=Ol%C3%A1!%20Entrei%20em%20contato%20atrav%C3%A9s%20do%20seu%20portf%C3%B3lio,%20podemos%20conversar?`,
     },
-    { name: 'Currículo', img: curriculo, link: '' },
+    {
+      name: 'Currículo',
+      img: curriculo,
+      link: '',
+    },
   ];
   const [openCurriculum, setOpenCurriculum] = useState<boolean | null>(null);
 
@@ -45,7 +49,7 @@ function HeroSection() {
 
   const yesButton = () => {
     const link = document.createElement('a');
-    link.href = '/pdf.pdf';
+    link.href = '/files/Curriculo.pdf';
     link.download = 'Curriculo-Yanne.pdf';
     document.body.appendChild(link);
     link.click();
@@ -70,15 +74,13 @@ function HeroSection() {
 
   return (
     <div id="inicio" style={bgStyle} className={heroWrapperStyles}>
-      <Window className="border-none -mt-[4px] " isBaloonChat>
-        <div className="w-[664px] px-[50px] pt-[40px] pb-[60px] flex flex-col gap-[45px] ">
+      <Window className="border-none -mt-1 " isBaloonChat>
+        <div className="w-166 px-12.5 pt-10 pb-15 flex flex-col gap-11.25 ">
           <div className="  text-[#221208]">
             <h1 className="text-[56px]">Oii, eu sou a Nana..</h1>
-            <p className="opacity-[65%] text-[24px]">
-              Sonhando em trabalhar com Desenvolvimento Web.
-            </p>
+            <p className="opacity-65 text-[24px]">Sonhando em trabalhar com Desenvolvimento Web.</p>
           </div>
-          <div className="flex flex-row gap-[20px]">
+          <div className="flex flex-row gap-5">
             {socialButtons.map((button) => {
               return (
                 <Button
@@ -94,9 +96,9 @@ function HeroSection() {
                   }}
                   className="hover:cursor-pointer hover:scale-[1.04] transition duration-300 ease-in-out"
                 >
-                  <div className="flex flex-col gap-[5px] items-center">
+                  <div className="flex flex-col gap-1.25 items-center">
                     <img src={button.img} alt="" />
-                    <p className="opacity-[65%]">{button.name}</p>
+                    <p className="opacity-65">{button.name}</p>
                   </div>
                 </Button>
               );
@@ -104,8 +106,8 @@ function HeroSection() {
           </div>
         </div>
       </Window>
-      <Window className="mt-[12px]" windowTitle="Nana">
-        <div className="w-full h-full p-[25px] flex items-center justify-center ">
+      <Window className="mt-3" windowTitle="Nana">
+        <div className="w-full h-full p-6.25 flex items-center justify-center ">
           <img src={heroNana} alt="" />
         </div>
       </Window>
@@ -113,21 +115,21 @@ function HeroSection() {
         <div className="fixed flex items-center justify-center z-50 animate-slideUp ">
           <Window windowTitle="Atenção" showButtons closeButton={handleCloseModal}>
             <div className="flex flex-col items-center justify-center w-[320px] ">
-              <div className="w-full py-[24px] text-[24px]">
+              <div className="w-full py-6 text-[24px]">
                 <p className="text-center text-wrap">Deseja baixar o Currículo?</p>
               </div>
-              <div className="flex flex-row gap-[20px] pb-[10px]">
+              <div className="flex flex-row gap-5 pb-2.5">
                 <Button
                   asChild={false}
                   onClick={noButton}
-                  className="w-[140px] h-[45px] bg-[#F2F2E8] text-[28px] p-[5px] hover:cursor-pointer hover:scale-[1.03] border-[2px] transition duration-300 ease-in-out"
+                  className="w-35 h-11.25 bg-[#F2F2E8] text-[28px] p-1.25 hover:cursor-pointer hover:scale-[1.03] border-2 transition duration-300 ease-in-out"
                 >
                   Não
                 </Button>
                 <Button
                   asChild={false}
                   onClick={yesButton}
-                  className="w-[140px] h-[45px] bg-[#82AADE] text-[28px] p-[5px] hover:cursor-pointer hover:scale-[1.03] border-[2px] transition duration-300 ease-in-out"
+                  className="w-35 h-11.25 bg-[#82AADE] text-[28px] p-1.25 hover:cursor-pointer hover:scale-[1.03] border-2 transition duration-300 ease-in-out"
                 >
                   Sim
                 </Button>
